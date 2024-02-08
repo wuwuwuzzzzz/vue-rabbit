@@ -1,4 +1,4 @@
-import httpInstance from '@/utils/http.js';
+import httpInstance from '@/utils/http';
 
 // 获取首页轮播图
 export function getBannerAPI() {
