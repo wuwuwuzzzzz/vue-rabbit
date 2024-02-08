@@ -13,6 +13,15 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
+      imports: [
+        'vue',
+        'vue-router',
+        'pinia'
+      ],
+      dts: false,
+      eslintrc: {
+        enabled: true,
+      },
       resolvers: [ElementPlusResolver()],
     }),
     Components({
