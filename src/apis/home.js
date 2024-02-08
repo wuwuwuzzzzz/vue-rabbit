@@ -9,3 +9,8 @@ export function getBannerAPI() {
 export const findNewAPI = () => {
   return httpInstance.get('/home/new')
 }
+
+// 获取人气推荐
+export const getHotAPI = () => {
+  return  httpInstance.get('home/hot')
+}
