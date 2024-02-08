@@ -4,3 +4,8 @@ import httpInstance from '@/utils/http.js';
 export function getBannerAPI() {
   return httpInstance.get('/home/banner')
 }
+
+// 获取新鲜好物
+export const findNewAPI = () => {
+  return httpInstance.get('/home/new')
+}

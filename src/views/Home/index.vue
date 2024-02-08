@@ -13,7 +13,7 @@ import HomeProduct from '@/views/Home/components/HomeProduct.vue';
   </div>
   <HomeNew />
   <HomeHot />
-  <homeProduct />
+  <HomeProduct />
 </template>
 
 <style scoped>
