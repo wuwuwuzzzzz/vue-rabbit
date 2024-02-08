@@ -25,7 +25,6 @@ const categoryStore = useCategoryStore();
   </header>
 </template>
 
-
 <style scoped lang='scss'>
 .app-header {
   background: #fff;

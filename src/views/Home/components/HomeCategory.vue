@@ -33,7 +33,6 @@ const categoryStore = useCategoryStore();
   </div>
 </template>
 
-
 <style scoped lang='scss'>
 .home-category {
   width: 250px;

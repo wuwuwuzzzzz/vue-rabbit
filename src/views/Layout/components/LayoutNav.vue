@@ -28,7 +28,6 @@
   </nav>
 </template>
 
-
 <style scoped lang="scss">
 .app-topnav {
   background: #333;
