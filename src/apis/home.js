@@ -1,8 +1,14 @@
 import httpInstance from '@/utils/http';
 
 // 获取首页轮播图
-export function getBannerAPI() {
-  return httpInstance.get('/home/banner')
+export function getBannerAPI({ distributionSite = '1' }) {
+  return httpInstance({
+    url: '/home/banner',
+    method: 'get',
+    params: {
+      distributionSite
+    }
+  })
 }
 
 // 获取新鲜好物
