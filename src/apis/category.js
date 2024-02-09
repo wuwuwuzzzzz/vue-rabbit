@@ -9,3 +9,12 @@ export function getCategoryAPI(id) {
 export const getCategoryFilterAPI = (id) => {
   return httpInstance(`/category/sub/filter?id=${id}`)
 }
+
+// 获取导航数据
+export const getSubCategoryAPI = (data) => {
+  return httpInstance({
+    url:'/category/goods/temporary',
+    method:'POST',
+    data
+  })
+}
