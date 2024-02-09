@@ -16,7 +16,6 @@ httpInstance.interceptors.request.use(config => {
 // axios响应式拦截器
 httpInstance.interceptors.response.use(res => res.data, e => {
   ElMessage.error({
-    type: 'warning',
     message: e.response.data.msg
   })
   return Promise.reject(e)
