@@ -4,7 +4,7 @@ import { getBannerAPI } from '@/apis/home.js';
 
 const bannerList = ref([]);
 const getBanner = async () => {
-  const res = await getBannerAPI();
+  const res = await getBannerAPI({});
   bannerList.value = res.result;
 };
 
