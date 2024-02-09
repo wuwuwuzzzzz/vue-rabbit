@@ -9,7 +9,11 @@ export const useUserStore = defineStore('user', () => {
     userInfo.value = res.result
   }
 
-  return { userInfo, getUserInfo }
+  const clearUserInfo = () => {
+    userInfo.value = {}
+  }
+
+  return { userInfo, getUserInfo, clearUserInfo }
 }, {
   persist: true
 })
