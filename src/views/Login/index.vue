@@ -1,4 +1,8 @@
 <script setup>
+import { loginAPI } from '@/apis/user';
+import 'element-plus/theme-chalk/el-message.css'
+import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
 
 // 表单校验（账号 + 密码）
 const form = ref({
@@ -34,14 +38,18 @@ const rules = {
 
 // 获取 form 实例做统一校验
 const formRef = ref(null)
+const router = useRouter()
 
 const doLogin = () => {
-  formRef.value.validate((valid) => {
+  formRef.value.validate(async (valid) => {
     if (valid) {
-      console.log('登录成功')
-    } else {
-      console.log('登录失败')
-      return false
+      const { account, password } = form.value
+      const res = await loginAPI({ account, password })
+      ElMessage({
+        type: 'success',
+        message: '登录成功'
+      })
+      await router.replace({ path: '/' })
     }
   })
 }
