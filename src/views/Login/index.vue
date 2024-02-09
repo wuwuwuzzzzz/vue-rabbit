@@ -3,10 +3,19 @@
 // 表单校验（账号 + 密码）
 const form = ref({
   account: '',
-  password: ''
+  password: '',
+  agree: true
 })
 
 // 表单校验规则
+const agreeValidator = (rule, value, callback) => {
+  if (!value) {
+    callback(new Error('请勾选协议'))
+  } else {
+    callback()
+  }
+}
+
 const rules = {
   account: [
     { required: true, message: '请输入账号', trigger: 'blur' }
@@ -14,7 +23,27 @@ const rules = {
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
     { min: 6, max: 14, message: '密码长度在 6 到 14 个字符', trigger: 'blur' }
+  ],
+  agree: [
+    {
+      validator: agreeValidator,
+      trigger: 'change'
+    }
   ]
+}
+
+// 获取 form 实例做统一校验
+const formRef = ref(null)
+
+const doLogin = () => {
+  formRef.value.validate((valid) => {
+    if (valid) {
+      console.log('登录成功')
+    } else {
+      console.log('登录失败')
+      return false
+    }
+  })
 }
 </script>
 
@@ -39,19 +68,19 @@ const rules = {
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form :model="form" :rules="rules" label-position="right" label-width="60px" status-icon hide-required-asterisk>
+            <el-form ref="formRef" :model="form" :rules="rules" label-position="right" label-width="60px" status-icon hide-required-asterisk>
               <el-form-item label="账户" prop="account">
                 <el-input v-model="form.account" />
               </el-form-item>
               <el-form-item label="密码" prop="password">
                 <el-input v-model="form.password" />
               </el-form-item>
-              <el-form-item label-width="22px">
-                <el-checkbox  size="large">
+              <el-form-item label-width="22px" prop="agree">
+                <el-checkbox  size="large" v-model="form.agree">
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
-              <el-button size="large" class="subBtn">点击登录</el-button>
+              <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
             </el-form>
           </div>
         </div>
