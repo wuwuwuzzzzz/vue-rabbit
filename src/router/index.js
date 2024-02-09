@@ -30,7 +30,10 @@ const router = createRouter({
       name: 'Login',
       component: () => import('@/views/Login/index.vue')
     },
-  ]
+  ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 export default router
