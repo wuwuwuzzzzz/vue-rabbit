@@ -3,22 +3,20 @@ import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 
 export function useCategory () {
 
-  const categoryData = ref({
-    children: []
-  })
+  const categoryData = ref({})
   const route = useRoute()
+
   const getCategory = async (id = route.params.id) => {
-    console.log(id)
     const res = await getCategoryAPI(id)
     categoryData.value = res.result
   }
 
   onMounted(() => {
-    getCategory()
+    getCategory().then()
   })
 
   onBeforeRouteUpdate((to) => {
-    getCategory(to.params.id)
+    getCategory(to.params.id).then()
   })
 
   return {
