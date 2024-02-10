@@ -4,3 +4,7 @@ import httpInstance from '@/utils/http.js';
 export function getCheckInfoAPI() {
   return httpInstance.get('/member/order/pre')
 }
+
+export function createOrderAPI(data) {
+  return httpInstance.post('/member/order', data)
+}
