@@ -2,7 +2,7 @@
 import 'element-plus/theme-chalk/el-message.css'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
-import { useUserStore} from '@/stores/user.js';
+import { useUserStore} from '@/stores/userStore';
 
 // 表单校验（账号 + 密码）
 const form = ref({

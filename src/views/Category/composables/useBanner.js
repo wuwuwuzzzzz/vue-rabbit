@@ -12,7 +12,7 @@ export function useBanner() {
   };
 
   onMounted(() => {
-    getBanner().then(() =>{} )
+    getBanner().then()
   })
 
   return {
