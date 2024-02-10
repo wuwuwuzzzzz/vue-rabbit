@@ -1,4 +1,4 @@
-import httpInstance from '@/utils/http.js';
+import httpInstance from '@/utils/http';
 
 // 登录方法
 export const loginAPI = ({ account, password }) => {
@@ -8,6 +8,16 @@ export const loginAPI = ({ account, password }) => {
     data: {
       account,
       password
+    }
+  })
+}
+
+// 猜你喜欢
+export const getLikeListAPI = ({ limit = 4 }) => {
+  return httpInstance({
+    url:'/goods/relevant',
+    params: {
+      limit
     }
   })
 }
