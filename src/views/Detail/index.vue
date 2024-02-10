@@ -1,9 +1,9 @@
 <script setup>
-import { getDetail } from '@/apis/detail.js';
+import { getDetail } from '@/apis/detail';
 import { useRoute } from 'vue-router';
 import DetailHot from '@/views/Detail/components/DetailHot.vue';
 import { ElMessage } from 'element-plus';
-import { useCartStore } from '@/stores/cartStore.js';
+import { useCartStore } from '@/stores/cartStore';
 
 const goods = ref({})
 const route = useRoute()
