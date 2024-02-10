@@ -1,5 +1,5 @@
-import { useUserStore } from '@/stores/user';
-import { insertCartAPI, getCartListAPI } from '@/apis/cart';
+import { useUserStore } from '@/stores/userStore';
+import { insertCartAPI, getCartListAPI, delCartAPI } from '@/apis/cart';
 
 export const useCartStore = defineStore('cart', () => {
 
@@ -23,9 +23,19 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
-  const delCart = skuId => {
-    const index = cartList.value.findIndex(item => item.skuId === skuId);
-    cartList.value.splice(index, 1);
+  const delCart = async (skuId) => {
+    if (isLogin.value) {
+      await delCartAPI([skuId]);
+      const res = await getCartListAPI();
+      cartList.value = res.result;
+    } else {
+      const index = cartList.value.findIndex(item => item.skuId === skuId);
+      cartList.value.splice(index, 1);
+    }
+  }
+
+  const clearCart = () => {
+    cartList.value = [];
   }
 
   const singleCheck = (selected, skuId) => {
@@ -33,7 +43,7 @@ export const useCartStore = defineStore('cart', () => {
     item.selected = selected;
   }
 
-  const allCheck = selected => {
+  const allCheck = (selected) => {
     cartList.value.forEach(item => item.selected = selected);
   }
 
@@ -56,6 +66,7 @@ export const useCartStore = defineStore('cart', () => {
     cartList,
     addCart,
     delCart,
+    clearCart,
     singleCheck,
     allCheck,
     allCount,
