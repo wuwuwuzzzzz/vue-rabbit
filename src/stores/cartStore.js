@@ -7,12 +7,16 @@ export const useCartStore = defineStore('cart', () => {
   const isLogin = computed(() => userStore.userInfo.token);
   const cartList = ref([]);
 
+  const updateCartList = async () => {
+    const res = await getCartListAPI();
+    cartList.value = res.result;
+  }
+
   const addCart = async (goods) => {
     if (isLogin.value) {
       const { skuId, count } = goods;
       await insertCartAPI({ skuId, count });
-      const res = await getCartListAPI();
-      cartList.value = res.result;
+      await updateCartList();
     } else {
       const item = cartList.value.find(item => goods.skuId === item.skuId);
       if (item) {
@@ -26,8 +30,7 @@ export const useCartStore = defineStore('cart', () => {
   const delCart = async (skuId) => {
     if (isLogin.value) {
       await delCartAPI([skuId]);
-      const res = await getCartListAPI();
-      cartList.value = res.result;
+      await updateCartList();
     } else {
       const index = cartList.value.findIndex(item => item.skuId === skuId);
       cartList.value.splice(index, 1);
@@ -64,6 +67,7 @@ export const useCartStore = defineStore('cart', () => {
 
   return {
     cartList,
+    updateCartList,
     addCart,
     delCart,
     clearCart,
