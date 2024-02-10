@@ -16,5 +16,9 @@ export const useCartStore = defineStore('cart', () => {
     cartList.value.splice(index, 1);
   }
 
-  return { cartList, addCart, delCart }
+  const allCount = computed(() => cartList.value.reduce((a, c) => a + c.count, 0))
+
+  const allPrice = computed(() => cartList.value.reduce((a, c) => a + c.count * c.price, 0))
+
+  return { cartList, addCart, delCart, allCount, allPrice }
 });
