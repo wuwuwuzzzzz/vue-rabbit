@@ -13,6 +13,8 @@ const getCheckInfo = async () => {
 onMounted(() => {
   getCheckInfo()
 })
+
+const toggleFlag = ref(false)
 </script>
 
 <template>
@@ -53,7 +55,7 @@ onMounted(() => {
             <tbody>
             <tr v-for="i in checkInfo.goods" :key="i.id">
               <td>
-                <a href="javascript:;" class="info">
+                <a href="javascript:" class="info">
                   <img :src="i.picture" alt="">
                   <div class="right">
                     <p>{{ i.name }}</p>
@@ -72,15 +74,15 @@ onMounted(() => {
         <!-- 配送时间 -->
         <h3 class="box-title">配送时间</h3>
         <div class="box-body">
-          <a class="my-btn active" href="javascript:;">不限送货时间：周一至周日</a>
-          <a class="my-btn" href="javascript:;">工作日送货：周一至周五</a>
-          <a class="my-btn" href="javascript:;">双休日、假日送货：周六至周日</a>
+          <a class="my-btn active" href="javascript:">不限送货时间：周一至周日</a>
+          <a class="my-btn" href="javascript:">工作日送货：周一至周五</a>
+          <a class="my-btn" href="javascript:">双休日、假日送货：周六至周日</a>
         </div>
         <!-- 支付方式 -->
         <h3 class="box-title">支付方式</h3>
         <div class="box-body">
-          <a class="my-btn active" href="javascript:;">在线支付</a>
-          <a class="my-btn" href="javascript:;">货到付款</a>
+          <a class="my-btn active" href="javascript:">在线支付</a>
+          <a class="my-btn" href="javascript:">货到付款</a>
           <span style="color:#999">货到付款需付5元手续费</span>
         </div>
         <!-- 金额明细 -->
@@ -113,6 +115,23 @@ onMounted(() => {
     </div>
   </div>
   <!-- 切换地址 -->
+  <el-dialog v-model="toggleFlag" title="切换收货地址" width="30%" center>
+    <div class="addressWrapper">
+      <div class="text item" v-for="item in checkInfo.userAddresses"  :key="item.id">
+        <ul>
+          <li><span>收<i />货<i />人：</span>{{ item.receiver }} </li>
+          <li><span>联系方式：</span>{{ item.contact }}</li>
+          <li><span>收货地址：</span>{{ item.fullLocation + item.address }}</li>
+        </ul>
+      </div>
+    </div>
+    <template #footer>
+    <span class="dialog-footer">
+      <el-button>取消</el-button>
+      <el-button type="primary">确定</el-button>
+    </span>
+    </template>
+  </el-dialog>
   <!-- 添加地址 -->
 </template>
 
