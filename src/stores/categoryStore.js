@@ -1,4 +1,4 @@
-import { getCategoryAPI } from '@/apis/layout.js';
+import { getCategoryAPI } from '@/apis/layout';
 
 export const useCategoryStore = defineStore('counter', () => {
   // state 导航列表数据
